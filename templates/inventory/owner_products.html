@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Manage products{% endblock %}
+{% block content %}
+<div class="page-header"><div class="container d-flex flex-wrap justify-content-between align-items-end gap-2">
+  <div><h1 class="h2 mb-1">Products</h1><p class="text-muted mb-0">Post new items and keep stock levels up to date.</p></div>
+  <div class="d-flex gap-2">
+    <a href="{% url 'inventory:owner_dashboard' %}" class="btn btn-outline-dark btn-sm">&larr; Bookings</a>
+    <a href="{% url 'inventory:owner_product_new' %}" class="btn btn-brand btn-sm"><i class="bi bi-plus-lg" aria-hidden="true"></i> Post new item</a>
+  </div>
+</div></div>
+<div class="container py-4">
+  <div class="row g-3">
+  {% for p in products %}
+    <div class="col-sm-6 col-lg-4 col-xl-3">
+      <article class="card h-100">
+        <img src="{{ p.image_url }}" alt="" class="card-img-top" width="600" height="450" loading="lazy">
+        <div class="card-body">
+          <div class="d-flex justify-content-between"><span class="badge badge-cat">{{ p.category.name }}</span>{% if not p.is_active %}<span class="badge text-bg-secondary">Hidden</span>{% endif %}</div>
+          <h2 class="h6 mt-2">{{ p.name }}</h2>
+          <p class="small mb-2">${{ p.daily_rate }}/day &middot; {{ p.quantity_total }} in stock &middot; {{ p.active_bookings }} active booking{{ p.active_bookings|pluralize }}</p>
+          <a href="{% url 'inventory:owner_product_edit' p.slug %}" class="btn btn-sm btn-outline-dark">Edit</a>
+          {% if p.is_active %}<a href="{{ p.get_absolute_url }}" class="btn btn-sm btn-link">View</a>{% endif %}
+        </div>
+      </article>
+    </div>
+  {% empty %}
+    <div class="col-12"><div class="empty-state">No products yet. <a href="{% url 'inventory:owner_product_new' %}">Post your first item</a>.</div></div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}

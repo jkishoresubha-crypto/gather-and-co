@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+<div class="container py-5" style="max-width: 480px;">
+  <div class="card card-body p-4">
+    <h1 class="h3 mb-3">Sign in</h1>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}<div class="alert alert-danger small" role="alert">{% for e in form.non_field_errors %}{{ e }}{% endfor %}</div>{% endif %}
+      {% for field in form %}{% include "includes/field.html" %}{% endfor %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <button type="submit" class="btn btn-brand w-100">Sign in</button>
+    </form>
+    <p class="small mt-3 mb-0">New here? <a href="{% url 'signup' %}">Create a customer account</a>.</p>
+  </div>
+  <div class="card card-body mt-3 small demo-box">
+    <h2 class="h6"><i class="bi bi-person-badge" aria-hidden="true"></i> Demo accounts</h2>
+    <p class="mb-1"><strong>Customer:</strong> username <code>customer</code>, password <code>GatherGuest#2026</code></p>
+    <p class="mb-0"><strong>Owner:</strong> username <code>owner</code>, password <code>GatherOwner#2026</code></p>
+    <p class="text-muted mb-0 mt-1">Demo data for assessment testing only.</p>
+  </div>
+</div>
+{% endblock %}

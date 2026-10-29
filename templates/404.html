@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Page not found{% endblock %}
+{% block content %}
+<div class="container py-5 text-center error-page" style="max-width: 680px;">
+  <p class="error-code">404</p>
+  <h1 class="h2">We couldn't find that page</h1>
+  <p class="text-muted">The address may be mistyped, or the item may have been removed from our inventory. HTTP 404 means &ldquo;Not Found&rdquo;.</p>
+  <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+    <a href="{% url 'core:home' %}" class="btn btn-brand"><i class="bi bi-house" aria-hidden="true"></i> Return home</a>
+    <button type="button" class="btn btn-outline-dark" data-open-chat data-chat-prompt="I got a 404 page not found error. What should I do?"><i class="bi bi-chat-dots" aria-hidden="true"></i> Ask the assistant</button>
+  </div>
+  <p class="small mt-4"><a href="{% url 'inventory:catalog' %}">Browse inventory</a> &middot; <a href="{% url 'faqs:error_codes' %}#code-404">About error 404</a></p>
+</div>
+{% endblock %}

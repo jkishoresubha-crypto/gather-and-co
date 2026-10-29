@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Error code reference{% endblock %}
+{% block content %}
+<div class="page-header"><div class="container"><h1 class="h2 mb-1">Error code reference</h1><p class="text-muted mb-0">What each error means, why it happens and what to do next.</p></div></div>
+<div class="container py-4">
+  <div class="row g-4">
+    <div class="col-lg-4">
+      <div class="card card-body mb-3 info-card">
+        <h2 class="h6">HTTP status codes vs. application codes</h2>
+        <p class="small mb-2"><strong>HTTP status codes</strong> (400–503) are a web standard. Every response from any website carries one, and browsers and tools understand them.</p>
+        <p class="small mb-0"><strong>Application codes</strong> are specific to Gather &amp; Co. <strong>4600 AI_ASSISTANT_UNAVAILABLE</strong> is our own code: it is <em>not</em> an HTTP status. It appears inside the chat when the AI service cannot answer, while the page itself still loads normally (HTTP 200).</p>
+      </div>
+      <form method="get" role="search" aria-label="Search error codes" class="d-flex gap-2">
+        <label for="code-q" class="visually-hidden">Search error codes</label>
+        <input type="search" id="code-q" name="q" value="{{ query }}" class="form-control" placeholder="e.g. 404 or forbidden" maxlength="60">
+        <button class="btn btn-brand" type="submit">Search</button>
+      </form>
+      {% if query %}<a href="?" class="small d-inline-block mt-2">Clear search</a>{% endif %}
+      <nav class="mt-3 d-none d-lg-block" aria-label="Jump to code">
+        <ul class="list-unstyled small">{% for c in codes %}<li><a href="#code-{{ c.code }}">{{ c.code }} {{ c.name }}</a></li>{% endfor %}</ul>
+      </nav>
+    </div>
+    <div class="col-lg-8">
+      {% for c in codes %}
+      <article class="card mb-3 code-card" id="code-{{ c.code }}">
+        <div class="card-body">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+            <span class="code-num {% if c.kind == 'app' %}app{% elif c.code >= 500 %}server{% endif %}">{{ c.code }}</span>
+            <h2 class="h5 mb-0">{{ c.name }}</h2>
+            <span class="badge {% if c.kind == 'app' %}text-bg-warning{% else %}text-bg-light border{% endif %}">{{ c.get_kind_display }}</span>
+          </div>
+          <p class="mb-3">{{ c.meaning }}</p>
+          <div class="row g-3 small">
+            <div class="col-md-6"><h3 class="h6">Common causes</h3><ul class="mb-0">{% for x in c.causes_list %}<li>{{ x }}</li>{% endfor %}</ul></div>
+            <div class="col-md-6"><h3 class="h6">Troubleshooting</h3><ol class="mb-0">{% for x in c.steps_list %}<li>{{ x }}</li>{% endfor %}</ol></div>
+          </div>
+          <p class="small mt-3 mb-0"><strong>Recommended next action:</strong> {{ c.next_action }}</p>
+        </div>
+      </article>
+      {% empty %}
+      <div class="empty-state"><p class="mb-2">No error codes match &ldquo;{{ query }}&rdquo;.</p><a href="?" class="btn btn-sm btn-outline-dark">Show all codes</a></div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

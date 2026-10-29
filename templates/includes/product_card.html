@@ -1,0 +1,19 @@
+<article class="card product-card h-100">
+  <a href="{{ product.get_absolute_url }}" class="product-img-wrap" tabindex="-1" aria-hidden="true">
+    <img src="{{ product.image_url }}" alt="" class="card-img-top" loading="lazy" width="600" height="450">
+  </a>
+  <div class="card-body d-flex flex-column">
+    <span class="badge badge-cat mb-2 align-self-start">{{ product.category.name }}</span>
+    <h3 class="h5 card-title"><a href="{{ product.get_absolute_url }}" class="stretched-link text-reset text-decoration-none">{{ product.name }}</a></h3>
+    <p class="card-text small text-muted flex-grow-1">{{ product.description|truncatewords:18 }}</p>
+    <div class="d-flex justify-content-between align-items-end">
+      <div><span class="price">${{ product.daily_rate }}</span><span class="small text-muted"> / day</span></div>
+      {% if available is not None %}
+        {% if available > 0 %}<span class="badge text-bg-success">{{ available }} available</span>
+        {% else %}<span class="badge text-bg-secondary">Fully booked</span>{% endif %}
+      {% else %}
+        <span class="small text-muted">{{ product.quantity_total }} in stock</span>
+      {% endif %}
+    </div>
+  </div>
+</article>

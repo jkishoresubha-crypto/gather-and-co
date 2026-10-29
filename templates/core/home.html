@@ -1,0 +1,103 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}Event rentals you can reserve online{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container py-5">
+    <div class="row align-items-center g-4 g-lg-5">
+      <div class="col-lg-6">
+        <p class="eyebrow">Event rental inventory</p>
+        <h1 class="display-5 hero-title">Everything you need to gather, reserved in minutes.</h1>
+        <p class="lead text-muted">Browse chairs, tables, tents, lighting and tableware, check live availability for your dates, and send a booking request. Our owner confirms every reservation personally.</p>
+        <div class="d-flex flex-wrap gap-2 mt-4">
+          <a href="{% url 'inventory:catalog' %}" class="btn btn-brand btn-lg">Browse inventory</a>
+          {% if not user.is_authenticated %}<a href="{% url 'signup' %}" class="btn btn-outline-dark btn-lg">Create free account</a>{% endif %}
+        </div>
+        <ul class="list-inline small text-muted mt-4 mb-0">
+          <li class="list-inline-item"><i class="bi bi-check2-circle text-brand" aria-hidden="true"></i> Live availability</li>
+          <li class="list-inline-item"><i class="bi bi-check2-circle text-brand" aria-hidden="true"></i> No payment online</li>
+          <li class="list-inline-item"><i class="bi bi-check2-circle text-brand" aria-hidden="true"></i> Cancel anytime</li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-collage">
+          <img src="{% static 'img/products/frame-tent.svg' %}" alt="White frame marquee tent" class="c1" width="600" height="450">
+          <img src="{% static 'img/products/chiavari-chair.svg' %}" alt="Gold Chiavari chair" class="c2" width="600" height="450">
+          <img src="{% static 'img/products/festoon-lights.svg' %}" alt="Festoon string lights" class="c3" width="600" height="450">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container py-5">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="d-flex justify-content-between align-items-end mb-3">
+        <h2 class="h3 mb-0">Popular for upcoming events</h2>
+        <a href="{% url 'inventory:catalog' %}" class="small">See all items &rarr;</a>
+      </div>
+      <div class="row g-3">
+        {% for product in featured %}
+          <div class="col-sm-6 col-xl-4">{% include "includes/product_card.html" with available=None %}</div>
+        {% empty %}
+          <div class="col-12"><div class="empty-state">No items in the catalogue yet. The owner can post items from the owner dashboard.</div></div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card weather-card h-100">
+        <div class="card-body">
+          <h2 class="h5"><i class="bi bi-cloud-sun" aria-hidden="true"></i> Event-day weather</h2>
+          <p class="small text-muted">Planning an outdoor event? Check the live weather before choosing a tent.</p>
+          <form method="get" class="d-flex gap-2 mb-3" role="search">
+            <label for="city" class="visually-hidden">City</label>
+            <input type="text" id="city" name="city" class="form-control form-control-sm" placeholder="Enter a city" value="{{ weather_city }}" maxlength="60">
+            <button class="btn btn-sm btn-outline-dark" type="submit">Check</button>
+          </form>
+          {% if weather.ok %}
+            <div class="d-flex align-items-center gap-3">
+              <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="" width="64" height="64">
+              <div>
+                <div class="display-6 fw-semibold">{{ weather.temp }}&deg;C</div>
+                <div>{{ weather.description }} &middot; {{ weather.city }}{% if weather.country %}, {{ weather.country }}{% endif %}</div>
+              </div>
+            </div>
+            <ul class="list-unstyled small mt-3 mb-0 text-muted">
+              <li>Feels like {{ weather.feels_like }}&deg;C</li>
+              <li>Humidity {{ weather.humidity }}%</li>
+              <li>Wind {{ weather.wind }} m/s</li>
+            </ul>
+            <p class="small text-muted mt-2 mb-0">Live data from OpenWeather.</p>
+          {% else %}
+            <div class="alert alert-secondary small mb-0" role="status"><i class="bi bi-info-circle" aria-hidden="true"></i> {{ weather.message }}</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-soft py-5">
+  <div class="container">
+    <h2 class="h3 text-center mb-4">How reserving works</h2>
+    <div class="row g-4 text-center">
+      <div class="col-md-4"><div class="step-icon"><i class="bi bi-search" aria-hidden="true"></i></div><h3 class="h5">1. Browse &amp; check dates</h3><p class="text-muted small">Filter the inventory and enter your event dates to see what is available.</p></div>
+      <div class="col-md-4"><div class="step-icon"><i class="bi bi-calendar-plus" aria-hidden="true"></i></div><h3 class="h5">2. Reserve</h3><p class="text-muted small">Choose a quantity and send your booking. You get a reference like BK-1A2B3C.</p></div>
+      <div class="col-md-4"><div class="step-icon"><i class="bi bi-patch-check" aria-hidden="true"></i></div><h3 class="h5">3. Owner confirms</h3><p class="text-muted small">The owner reviews the request and confirms it. Track the status in My bookings.</p></div>
+    </div>
+    <div class="row g-3 mt-4">
+      {% for c in categories %}
+        <div class="col-6 col-md-4 col-lg-2"><a class="category-tile" href="{% url 'inventory:catalog' %}?category={{ c.slug }}">{{ c.name }}</a></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="container py-5">
+  <div class="row g-4">
+    <div class="col-md-4"><a class="help-tile" href="{% url 'faqs:list' %}"><i class="bi bi-question-circle" aria-hidden="true"></i><h3 class="h5">FAQ</h3><p class="small text-muted mb-0">Answers about booking, pricing, the assistant and more.</p></a></div>
+    <div class="col-md-4"><a class="help-tile" href="{% url 'faqs:error_codes' %}"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i><h3 class="h5">Error code reference</h3><p class="small text-muted mb-0">What 400, 404, 429, 500 or 4600 mean and how to fix them.</p></a></div>
+    <div class="col-md-4"><a class="help-tile" href="{% url 'support:support' %}"><i class="bi bi-life-preserver" aria-hidden="true"></i><h3 class="h5">Support</h3><p class="small text-muted mb-0">Create a ticket and get a reference number to follow up.</p></a></div>
+  </div>
+</section>
+{% endblock %}

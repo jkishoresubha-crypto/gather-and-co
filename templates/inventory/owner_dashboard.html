@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Owner dashboard{% endblock %}
+{% block content %}
+<div class="page-header"><div class="container d-flex flex-wrap justify-content-between align-items-end gap-2">
+  <div><h1 class="h2 mb-1">Owner dashboard</h1><p class="text-muted mb-0">Review and confirm customer bookings.</p></div>
+  <div class="d-flex gap-2">
+    <a href="{% url 'inventory:owner_products' %}" class="btn btn-outline-dark btn-sm"><i class="bi bi-box-seam" aria-hidden="true"></i> Manage products</a>
+    <a href="{% url 'inventory:owner_product_new' %}" class="btn btn-brand btn-sm"><i class="bi bi-plus-lg" aria-hidden="true"></i> Post new item</a>
+  </div>
+</div></div>
+<div class="container py-4">
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-md-3"><div class="stat"><div class="stat-num">{{ stats.pending }}</div><div class="stat-label">Pending review</div></div></div>
+    <div class="col-6 col-md-3"><div class="stat"><div class="stat-num">{{ stats.confirmed }}</div><div class="stat-label">Confirmed</div></div></div>
+    <div class="col-6 col-md-3"><div class="stat"><div class="stat-num">{{ stats.upcoming }}</div><div class="stat-label">Upcoming confirmed</div></div></div>
+    <div class="col-6 col-md-3"><div class="stat"><div class="stat-num">{{ stats.products }}</div><div class="stat-label">Active products</div></div></div>
+  </div>
+
+  <nav aria-label="Filter bookings by status" class="mb-3">
+    <ul class="nav nav-pills small flex-wrap">
+      <li class="nav-item"><a class="nav-link {% if not status %}active{% endif %}" href="?">All</a></li>
+      {% for value, label in status_choices %}
+      <li class="nav-item"><a class="nav-link {% if status == value %}active{% endif %}" href="?status={{ value }}">{{ label }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  {% if bookings %}
+  <div class="table-responsive card">
+    <table class="table align-middle mb-0 owner-table">
+      <caption class="visually-hidden">Customer bookings</caption>
+      <thead class="table-light"><tr>
+        <th scope="col">Booking</th><th scope="col">Item</th><th scope="col">Customer</th><th scope="col">Dates</th><th scope="col">Qty</th><th scope="col">Total</th><th scope="col">Status</th><th scope="col">Action</th>
+      </tr></thead>
+      <tbody>
+      {% for b in bookings %}
+        <tr>
+          <td><strong>{{ b.reference }}</strong><div class="small text-muted">{{ b.created_at|date:"j M, H:i" }}</div></td>
+          <td><div class="d-flex align-items-center gap-2"><img src="{{ b.product.image_url }}" alt="" width="48" height="36" class="rounded object-fit-cover">{{ b.product.name }}</div></td>
+          <td>{{ b.customer.get_full_name|default:b.customer.username }}<div class="small text-muted">{{ b.customer.email }}{% if b.contact_phone %} &middot; {{ b.contact_phone }}{% endif %}</div>{% if b.event_note %}<div class="small fst-italic">{{ b.event_note }}</div>{% endif %}</td>
+          <td class="text-nowrap small">{{ b.start_date|date:"j M Y" }}<br>&rarr; {{ b.end_date|date:"j M Y" }}</td>
+          <td>{{ b.quantity }}</td>
+          <td>${{ b.total_price }}</td>
+          <td><span class="badge status-{{ b.status }}">{{ b.get_status_display }}</span></td>
+          <td>
+            {% if b.status == "pending" or b.status == "confirmed" %}
+            <form method="post" action="{% url 'inventory:owner_update_booking' b.reference %}" class="d-flex flex-wrap gap-1">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ request.get_full_path }}">
+              <label class="visually-hidden" for="note-{{ b.reference }}">Note for {{ b.reference }}</label>
+              <input type="text" name="owner_note" id="note-{{ b.reference }}" maxlength="300" class="form-control form-control-sm" placeholder="Note (optional)" value="{{ b.owner_note }}">
+              {% if b.status == "pending" %}
+                <button name="status" value="confirmed" class="btn btn-sm btn-success">Confirm</button>
+              {% else %}
+                <button name="status" value="completed" class="btn btn-sm btn-outline-success">Mark completed</button>
+              {% endif %}
+              <button name="status" value="declined" class="btn btn-sm btn-outline-danger">Decline</button>
+            </form>
+            {% else %}<span class="small text-muted">No action</span>{% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty-state"><i class="bi bi-inbox display-6" aria-hidden="true"></i><p class="mb-0">No bookings{% if status %} with this status{% endif %} yet.</p></div>
+  {% endif %}
+  <p class="small text-muted mt-3">Support tickets and full records are managed in the secure <a href="{% url 'admin:index' %}">Django admin</a>.</p>
+</div>
+{% endblock %}

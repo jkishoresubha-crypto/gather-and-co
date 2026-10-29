@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{% if product %}Edit {{ product.name }}{% else %}Post new item{% endif %}{% endblock %}
+{% block content %}
+<div class="container py-4" style="max-width: 860px;">
+  <a href="{% url 'inventory:owner_products' %}" class="small">&larr; Back to products</a>
+  <h1 class="h2 mt-2">{% if product %}Edit &ldquo;{{ product.name }}&rdquo;{% else %}Post a new item{% endif %}</h1>
+  <div class="row g-4">
+    <div class="col-md-8">
+      <form method="post" enctype="multipart/form-data" class="card card-body" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="alert alert-danger" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+        {% for field in form %}{% include "includes/field.html" %}{% endfor %}
+        <button type="submit" class="btn btn-brand" data-loading-text="Saving&hellip;">{% if product %}Save changes{% else %}Post item{% endif %}</button>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <p class="small fw-semibold mb-1">Current image</p>
+      <img src="{% if product %}{{ product.image_url }}{% else %}{% load static %}{% static 'img/products/placeholder.svg' %}{% endif %}" alt="" class="img-fluid rounded-3 border" id="image-preview">
+      <p class="small text-muted mt-2">Uploaded photos are stored in the database so they persist across deployments.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+document.getElementById("id_image")?.addEventListener("change", function (e) {
+  var f = e.target.files && e.target.files[0];
+  if (f && f.type.startsWith("image/")) document.getElementById("image-preview").src = URL.createObjectURL(f);
+});
+</script>
+{% endblock %}

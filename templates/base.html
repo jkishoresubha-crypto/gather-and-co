@@ -1,0 +1,107 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Event rentals{% endblock %} · {{ SITE_NAME }}</title>
+  <meta name="description" content="{% block description %}Gather & Co. – reserve chairs, tables, tents, lighting and décor for your event.{% endblock %}">
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="{% static 'css/site.css' %}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <a class="visually-hidden-focusable skip-link" href="#main">Skip to main content</a>
+
+  <nav class="navbar navbar-expand-lg site-nav sticky-top" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand brand" href="{% url 'core:home' %}"><span class="brand-mark" aria-hidden="true">G</span>Gather <span class="amp">&amp;</span> Co.</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+              aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        {% with url=request.resolver_match.view_name %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link {% if url == 'core:home' %}active{% endif %}" href="{% url 'core:home' %}" {% if url == 'core:home' %}aria-current="page"{% endif %}>Home</a></li>
+          <li class="nav-item"><a class="nav-link {% if url == 'inventory:catalog' or url == 'inventory:detail' %}active{% endif %}" href="{% url 'inventory:catalog' %}">Inventory</a></li>
+          <li class="nav-item"><a class="nav-link {% if url == 'faqs:list' %}active{% endif %}" href="{% url 'faqs:list' %}">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link {% if url == 'faqs:error_codes' %}active{% endif %}" href="{% url 'faqs:error_codes' %}">Error codes</a></li>
+          <li class="nav-item"><a class="nav-link {% if url == 'support:support' %}active{% endif %}" href="{% url 'support:support' %}">Support</a></li>
+        </ul>
+        {% endwith %}
+        <ul class="navbar-nav align-items-lg-center gap-lg-2">
+          {% if user.is_authenticated %}
+            {% if is_owner %}
+              <li class="nav-item"><a class="nav-link" href="{% url 'inventory:owner_dashboard' %}"><i class="bi bi-speedometer2" aria-hidden="true"></i> Owner dashboard</a></li>
+            {% endif %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'inventory:my_bookings' %}"><i class="bi bi-calendar-check" aria-hidden="true"></i> My bookings</a></li>
+            <li class="nav-item">
+              <form method="post" action="{% url 'logout' %}" class="d-inline">{% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-outline-dark">Sign out {{ user.username }}</button>
+              </form>
+            </li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Sign in</a></li>
+            <li class="nav-item"><a class="btn btn-sm btn-brand" href="{% url 'signup' %}">Create account</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-3" aria-live="polite">
+    {% for message in messages %}
+      <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags|default:'info' }}{% endif %} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </div>
+
+  <main id="main" class="flex-grow-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer mt-5">
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-md-5">
+          <div class="brand text-white mb-2"><span class="brand-mark" aria-hidden="true">G</span>Gather <span class="amp">&amp;</span> Co.</div>
+          <p class="small mb-0">Event rentals made simple – browse our inventory, check availability and reserve online. The owner confirms every booking personally.</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <h2 class="h6 text-white">Explore</h2>
+          <ul class="list-unstyled small">
+            <li><a href="{% url 'core:home' %}">Home</a></li>
+            <li><a href="{% url 'inventory:catalog' %}">Inventory</a></li>
+            <li><a href="{% url 'faqs:list' %}">FAQ</a></li>
+            <li><a href="{% url 'faqs:error_codes' %}">Error code reference</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md-4">
+          <h2 class="h6 text-white">Help</h2>
+          <ul class="list-unstyled small">
+            <li><a href="{% url 'support:support' %}">Create a support ticket</a></li>
+            <li><button type="button" class="btn btn-link p-0 small footer-link" data-open-chat>Ask the assistant</button></li>
+            <li><a href="{% url 'health' %}">Service health</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="border-secondary">
+      <p class="small mb-0">&copy; {% now "Y" %} Gather &amp; Co. · A student software-development project.</p>
+    </div>
+  </footer>
+
+  {% include "includes/chat_widget.html" %}
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="{% static 'js/chat.js' %}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

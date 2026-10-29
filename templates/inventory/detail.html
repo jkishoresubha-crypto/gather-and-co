@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb small">
+      <li class="breadcrumb-item"><a href="{% url 'inventory:catalog' %}">Inventory</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'inventory:catalog' %}?category={{ product.category.slug }}">{{ product.category.name }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+    </ol>
+  </nav>
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <img src="{{ product.image_url }}" alt="{{ product.image_alt|default:product.name }}" class="img-fluid rounded-4 shadow-sm w-100 detail-img" width="600" height="450">
+    </div>
+    <div class="col-lg-5">
+      <span class="badge badge-cat">{{ product.category.name }}</span>
+      <h1 class="h2 mt-2">{{ product.name }}</h1>
+      <p class="fs-4 mb-1"><span class="price">${{ product.daily_rate }}</span> <span class="fs-6 text-muted">per item per day</span></p>
+      <p class="text-muted small">{{ product.quantity_total }} units in our inventory</p>
+      <p>{{ product.description }}</p>
+
+      <div class="card booking-card mt-3">
+        <div class="card-body">
+          <h2 class="h5">Reserve this item</h2>
+          {% if user.is_authenticated %}
+            <form method="post" novalidate>
+              {% csrf_token %}
+              {% if form.non_field_errors %}<div class="alert alert-danger small" role="alert">{% for e in form.non_field_errors %}{{ e }} {% endfor %}</div>{% endif %}
+              <div class="row g-2">
+                <div class="col-6">{% include "includes/field.html" with field=form.start_date %}</div>
+                <div class="col-6">{% include "includes/field.html" with field=form.end_date %}</div>
+              </div>
+              {% include "includes/field.html" with field=form.quantity %}
+              {% include "includes/field.html" with field=form.contact_phone %}
+              {% include "includes/field.html" with field=form.event_note %}
+              <p class="small text-muted" id="estimate" data-rate="{{ product.daily_rate }}" aria-live="polite"></p>
+              <button type="submit" class="btn btn-brand w-100" data-loading-text="Reserving&hellip;"><i class="bi bi-calendar-plus" aria-hidden="true"></i> Reserve</button>
+              <p class="small text-muted mt-2 mb-0">No payment is taken online. The owner confirms your booking.</p>
+            </form>
+          {% else %}
+            <p class="mb-3">Sign in or create a free account to reserve this item.</p>
+            <div class="d-flex gap-2">
+              <a href="{% url 'login' %}?next={{ request.path|urlencode }}" class="btn btn-brand">Sign in to reserve</a>
+              <a href="{% url 'signup' %}" class="btn btn-outline-dark">Create account</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if upcoming %}
+      <div class="mt-4">
+        <h2 class="h6">Already reserved dates</h2>
+        <ul class="list-unstyled small mb-0">
+          {% for b in upcoming %}<li><i class="bi bi-dot" aria-hidden="true"></i>{{ b.start_date|date:"j M" }} &ndash; {{ b.end_date|date:"j M Y" }}: {{ b.units }} unit{{ b.units|pluralize }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(function () {
+  var est = document.getElementById("estimate");
+  if (!est) return;
+  var rate = parseFloat(est.dataset.rate);
+  var s = document.getElementById("id_start_date"), e = document.getElementById("id_end_date"), q = document.getElementById("id_quantity");
+  function update() {
+    var sd = new Date(s.value), ed = new Date(e.value), qty = parseInt(q.value, 10);
+    if (isNaN(sd) || isNaN(ed) || !qty || ed < sd) { est.textContent = ""; return; }
+    var days = Math.round((ed - sd) / 86400000) + 1;
+    est.textContent = "Estimated total: $" + (rate * qty * days).toFixed(2) + " (" + qty + " × " + days + " day" + (days > 1 ? "s" : "") + ")";
+  }
+  [s, e, q].forEach(function (el) { el && el.addEventListener("input", update); });
+  update();
+})();
+</script>
+{% endblock %}

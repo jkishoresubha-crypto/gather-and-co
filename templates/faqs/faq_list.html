@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}FAQ{% endblock %}
+{% block content %}
+<div class="page-header"><div class="container"><h1 class="h2 mb-1">Frequently asked questions</h1><p class="text-muted mb-0">Verified answers, stored in our database and used by the assistant.</p></div></div>
+<div class="container py-4" style="max-width: 920px;">
+  <form method="get" class="row g-2 mb-3" role="search" aria-label="Search FAQs">
+    <div class="col-12 col-md-7">
+      <label for="faq-q" class="visually-hidden">Search FAQs</label>
+      <input type="search" id="faq-q" name="q" value="{{ query }}" class="form-control" placeholder="Search questions, e.g. cancel, 404, price" maxlength="100">
+    </div>
+    <div class="col-8 col-md-3">
+      <label for="faq-cat" class="visually-hidden">Category</label>
+      <select id="faq-cat" name="category" class="form-select">
+        <option value="">All categories</option>
+        {% for value, label in categories %}<option value="{{ value }}" {% if value == selected_category %}selected{% endif %}>{{ label }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="col-4 col-md-2 d-grid"><button class="btn btn-brand" type="submit">Search</button></div>
+  </form>
+  <div class="d-flex flex-wrap gap-2 mb-4" aria-label="Quick category filters">
+    <a href="?" class="chip {% if not selected_category %}active{% endif %}">All</a>
+    {% for value, label in categories %}<a href="?category={{ value }}" class="chip {% if value == selected_category %}active{% endif %}">{{ label }}</a>{% endfor %}
+  </div>
+  <p class="small text-muted" role="status">{{ faqs|length }} question{{ faqs|length|pluralize }}{% if query %} matching &ldquo;{{ query }}&rdquo;{% endif %}</p>
+  {% if faqs %}
+  <div class="accordion faq-accordion" id="faqAccordion">
+    {% for faq in faqs %}
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="faq-h-{{ faq.id }}">
+        <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#faq-{{ faq.id }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="faq-{{ faq.id }}">
+          <span class="badge badge-cat me-2">{{ faq.get_category_display }}</span> {{ faq.question }}
+        </button>
+      </h2>
+      <div id="faq-{{ faq.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="faq-h-{{ faq.id }}">
+        <div class="accordion-body">{{ faq.answer }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <i class="bi bi-search display-6" aria-hidden="true"></i>
+    <p class="mb-2">No FAQs match your search.</p>
+    <div class="d-flex gap-2 justify-content-center"><a href="?" class="btn btn-sm btn-outline-dark">Show all FAQs</a><button type="button" class="btn btn-sm btn-brand" data-open-chat>Ask the assistant</button></div>
+  </div>
+  {% endif %}
+  <p class="mt-4 small">Still stuck? <a href="{% url 'support:support' %}">Create a support ticket</a>.</p>
+</div>
+{% endblock %}
