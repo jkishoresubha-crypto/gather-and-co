@@ -1,0 +1,41 @@
+# Render Blueprint: one Python web service + one managed PostgreSQL database.
+databases:
+  - name: gather-co-db
+    plan: free
+    databaseName: gather_co
+    user: gather_co
+
+services:
+  - type: web
+    name: gather-co
+    runtime: python
+    plan: free
+    buildCommand: ./build.sh
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 60 --access-logfile -
+    healthCheckPath: /health/
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gather-co-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: localhost
+      - key: DEFAULT_WEATHER_CITY
+        value: London
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: MONGODB_DATABASE
+        value: gather_co
+      # Secrets: enter these in the Render dashboard (never commit them).
+      - key: MONGODB_URI
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENWEATHER_API_KEY
+        sync: false
