@@ -4,8 +4,8 @@ An event-rental **inventory and reservation website** built with Django. Custome
 
 | | |
 |---|---|
-| **Live website** | _DEPLOYMENT_URL_PLACEHOLDER_ |
-| **GitHub repository** | _REPO_URL_PLACEHOLDER_ |
+| **Live website** | _Pending: added after the Render deployment is verified (see Deployment)._ |
+| **GitHub repository** | https://github.com/jkishoresubha-crypto/gather-and-co |
 | **Health check** | `/health/` |
 
 ---
@@ -137,7 +137,7 @@ The tests mock all external services (OpenAI, OpenWeather, MongoDB), so they nee
 
 pages and chat widget on every page · FAQ retrieval from the database · FAQ search/filter · seed idempotency · all 8 error codes · custom 404 · custom 500 (via a test-only URLconf, so production has no crash endpoint) · booking create/overbooking/validation/cancel · status mass-assignment protection · owner permissions and confirmations · product photo upload validation · support ticket create/invalid input/rate limit · AI answer grounded in retrieved FAQs · AI fallback on missing key/timeout/HTTP error · ticket creation for unanswerable questions · undocumented codes not guessed · MongoDB logging, feedback and failure handling · OpenWeather caching/timeout/429/404/malformed/missing key · health endpoint (ok/degraded/503) · request logging without query strings · chat rate limiting · CSRF on chat · missing `DJANGO_SECRET_KEY` / `DATABASE_URL` · production security settings.
 
-**Latest result:** _TEST_RESULT_PLACEHOLDER_
+**Latest result:** `Ran 63 tests ... OK` (local run on Windows, Python 3.11.7, 29 Oct 2026).
 
 ## AI assistant workflow
 
@@ -206,7 +206,7 @@ Notes: Render's free instances sleep when idle, so the first request can take ab
 
 ## Screenshots
 
-_SCREENSHOTS_PLACEHOLDER_
+_To be added: screenshots taken from the deployed site (home, inventory, booking, owner dashboard, chat, 404)._
 
 ## Proposed future improvement
 
