@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Cocktail high-top table with spandex cover">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F0E6"/><stop offset="1" stop-color="#E9DAC5"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.35" r="0.6"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<rect width="600" height="450" fill="url(#glow)"/>
+<rect y="350" width="600" height="100" fill="#000" opacity="0.04"/>
+<ellipse cx="300" cy="372" rx="190" ry="16" fill="#000" opacity="0.10"/>
+
+<g>
+<ellipse cx="300" cy="120" rx="80" ry="20" fill="#FFFDF8" stroke="#D9CBB8" stroke-width="3"/>
+<path d="M222 124 Q290 200 284 250 Q270 320 230 366 L370 366 Q330 320 316 250 Q310 200 378 124 Z" fill="#FFFDF8" stroke="#D9CBB8" stroke-width="3"/>
+<path d="M300 254 Q300 230 300 140" stroke="#ECE5DA" stroke-width="3"/>
+<rect x="282" y="236" width="36" height="14" rx="7" fill="#C8643B"/>
+<path d="M262 92 l6 26 h-12 z" fill="#CFE6F2" stroke="#9CB8C7" stroke-width="2"/>
+<rect x="320" y="84" width="10" height="34" rx="3" fill="#2F4A3A"/>
+</g>
+
+</svg>

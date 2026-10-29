@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="White folding chair">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F0E6"/><stop offset="1" stop-color="#E9DAC5"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.35" r="0.6"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<rect width="600" height="450" fill="url(#glow)"/>
+<rect y="350" width="600" height="100" fill="#000" opacity="0.04"/>
+<ellipse cx="300" cy="372" rx="190" ry="16" fill="#000" opacity="0.10"/>
+
+<g stroke="#BDB5A9" stroke-width="3" stroke-linejoin="round">
+<rect x="244" y="96" width="112" height="64" rx="14" fill="#FFFDF8"/>
+<path d="M246 160 L232 368" stroke="#E8E2D8" stroke-width="12"/>
+<path d="M354 160 L368 368" stroke="#E8E2D8" stroke-width="12"/>
+<path d="M262 250 L360 368" stroke="#D8D1C5" stroke-width="10"/>
+<path d="M338 250 L240 368" stroke="#D8D1C5" stroke-width="10"/>
+<path d="M222 236 L378 236 L370 262 L230 262 Z" fill="#FFFDF8"/>
+</g>
+
+</svg>

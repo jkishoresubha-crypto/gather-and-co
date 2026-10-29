@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Porcelain dinner set">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F0E6"/><stop offset="1" stop-color="#E9DAC5"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.35" r="0.6"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<rect width="600" height="450" fill="url(#glow)"/>
+<rect y="350" width="600" height="100" fill="#000" opacity="0.04"/>
+<ellipse cx="300" cy="372" rx="190" ry="16" fill="#000" opacity="0.10"/>
+
+<ellipse cx="300" cy="250" rx="190" ry="80" fill="#FFFFFF" stroke="#D9CBB8" stroke-width="3"/>
+<ellipse cx="300" cy="250" rx="150" ry="60" fill="none" stroke="#C9A227" stroke-width="3"/>
+<ellipse cx="300" cy="240" rx="120" ry="48" fill="#FFFFFF" stroke="#D9CBB8" stroke-width="3"/>
+<ellipse cx="300" cy="238" rx="90" ry="34" fill="#F7F3EC" stroke="#C9A227" stroke-width="2"/>
+<rect x="70" y="190" width="10" height="130" rx="4" fill="#B9B2A6"/>
+<path d="M66 190 v-30 M75 190 v-30 M84 190 v-30" stroke="#B9B2A6" stroke-width="4"/>
+<rect x="520" y="160" width="12" height="160" rx="5" fill="#B9B2A6"/>
+<path d="M520 160 q20 30 0 60" fill="#CFC8BC"/>
+<path d="M250 200 q50 -26 100 0" stroke="#2F4A3A" stroke-width="5" fill="none"/>
+
+</svg>

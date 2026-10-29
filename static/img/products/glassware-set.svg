@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Crystal wine glasses">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F0E6"/><stop offset="1" stop-color="#E9DAC5"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.35" r="0.6"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<rect width="600" height="450" fill="url(#glow)"/>
+<rect y="350" width="600" height="100" fill="#000" opacity="0.04"/>
+<ellipse cx="300" cy="372" rx="190" ry="16" fill="#000" opacity="0.10"/>
+<g transform="translate(180,0)">
+<path d="M-40 120 Q-44 210 0 230 Q44 210 40 120 Z" fill="#E8F3F8" stroke="#9CB8C7" stroke-width="3"/>
+<path d="M-40 175 Q-36 214 0 226 Q36 214 40 175 Z" fill="#8E1C3A" opacity="0.8"/>
+<line x1="0" y1="230" x2="0" y2="340" stroke="#9CB8C7" stroke-width="5"/>
+<ellipse cx="0" cy="346" rx="40" ry="9" fill="#E8F3F8" stroke="#9CB8C7" stroke-width="3"/>
+<path d="M-26 135 Q-28 180 -16 200" stroke="#FFFFFF" stroke-width="5" fill="none"/>
+</g><g transform="translate(300,0)">
+<path d="M-40 120 Q-44 210 0 230 Q44 210 40 120 Z" fill="#E8F3F8" stroke="#9CB8C7" stroke-width="3"/>
+<path d="M-40 175 Q-36 214 0 226 Q36 214 40 175 Z" fill="#F1D88A" opacity="0.8"/>
+<line x1="0" y1="230" x2="0" y2="340" stroke="#9CB8C7" stroke-width="5"/>
+<ellipse cx="0" cy="346" rx="40" ry="9" fill="#E8F3F8" stroke="#9CB8C7" stroke-width="3"/>
+<path d="M-26 135 Q-28 180 -16 200" stroke="#FFFFFF" stroke-width="5" fill="none"/>
+</g><g transform="translate(420,0)">
+<path d="M-40 120 Q-44 210 0 230 Q44 210 40 120 Z" fill="#E8F3F8" stroke="#9CB8C7" stroke-width="3"/>
+<path d="M-40 175 Q-36 214 0 226 Q36 214 40 175 Z" fill="#C96C7E" opacity="0.8"/>
+<line x1="0" y1="230" x2="0" y2="340" stroke="#9CB8C7" stroke-width="5"/>
+<ellipse cx="0" cy="346" rx="40" ry="9" fill="#E8F3F8" stroke="#9CB8C7" stroke-width="3"/>
+<path d="M-26 135 Q-28 180 -16 200" stroke="#FFFFFF" stroke-width="5" fill="none"/>
+</g>
+</svg>

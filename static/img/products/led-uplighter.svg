@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="LED uplighter">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2B2638"/><stop offset="1" stop-color="#191622"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.35" r="0.6"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<rect width="600" height="450" fill="url(#glow)"/>
+<rect y="350" width="600" height="100" fill="#000" opacity="0.04"/>
+<ellipse cx="300" cy="372" rx="190" ry="16" fill="#000" opacity="0.10"/>
+
+<polygon points="270,250 330,250 470,30 130,30" fill="#B07CF2" opacity="0.22"/>
+<polygon points="285,250 315,250 400,40 200,40" fill="#C9A2F7" opacity="0.30"/>
+<rect x="240" y="250" width="120" height="110" rx="14" fill="#2E3138"/>
+<rect x="258" y="238" width="84" height="18" rx="6" fill="#4A4F59"/>
+<circle cx="275" cy="284" r="7" fill="#E3D2FF"/><circle cx="275" cy="312" r="7" fill="#E3D2FF"/><circle cx="300" cy="284" r="7" fill="#E3D2FF"/><circle cx="300" cy="312" r="7" fill="#E3D2FF"/><circle cx="325" cy="284" r="7" fill="#E3D2FF"/><circle cx="325" cy="312" r="7" fill="#E3D2FF"/>
+<rect x="252" y="340" width="96" height="8" rx="3" fill="#4A4F59"/>
+
+</svg>

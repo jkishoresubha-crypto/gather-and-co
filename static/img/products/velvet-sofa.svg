@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Green velvet lounge sofa">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F0E6"/><stop offset="1" stop-color="#E9DAC5"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.35" r="0.6"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<rect width="600" height="450" fill="url(#glow)"/>
+<rect y="350" width="600" height="100" fill="#000" opacity="0.04"/>
+<ellipse cx="300" cy="372" rx="190" ry="16" fill="#000" opacity="0.10"/>
+
+<g>
+<rect x="150" y="150" width="300" height="120" rx="40" fill="#2F4A3A"/>
+<rect x="120" y="200" width="70" height="120" rx="30" fill="#264034"/>
+<rect x="410" y="200" width="70" height="120" rx="30" fill="#264034"/>
+<rect x="170" y="240" width="260" height="70" rx="20" fill="#3B5C49"/>
+<path d="M300 160 L300 300" stroke="#264034" stroke-width="4"/>
+<rect x="160" y="300" width="280" height="30" rx="10" fill="#264034"/>
+<rect x="170" y="330" width="12" height="38" rx="4" fill="#C9A227"/>
+<rect x="418" y="330" width="12" height="38" rx="4" fill="#C9A227"/>
+<circle cx="230" cy="190" r="4" fill="#C9A227"/><circle cx="300" cy="185" r="4" fill="#C9A227"/><circle cx="370" cy="190" r="4" fill="#C9A227"/>
+<ellipse cx="215" cy="235" rx="34" ry="26" fill="#C8643B"/>
+</g>
+
+</svg>

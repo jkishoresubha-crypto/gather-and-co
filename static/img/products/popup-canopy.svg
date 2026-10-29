@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Pop-up canopy tent">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F0E6"/><stop offset="1" stop-color="#E9DAC5"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.35" r="0.6"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<rect width="600" height="450" fill="url(#glow)"/>
+<rect y="350" width="600" height="100" fill="#000" opacity="0.04"/>
+<ellipse cx="300" cy="372" rx="190" ry="16" fill="#000" opacity="0.10"/>
+
+<g stroke-linejoin="round">
+<polygon points="150,170 300,95 450,170" fill="#C8643B"/>
+<polygon points="300,95 450,170 420,170" fill="#A9502D"/>
+<path d="M150 170 h300 v22 q-25 14 -50 0 q-25 14 -50 0 q-25 14 -50 0 q-25 14 -50 0 q-25 14 -50 0 q-25 14 -50 0 z" fill="#FFFDF8" stroke="#D9CBB8" stroke-width="2"/>
+<rect x="156" y="190" width="10" height="178" fill="#8A8F94"/>
+<rect x="434" y="190" width="10" height="178" fill="#8A8F94"/>
+<rect x="210" y="190" width="7" height="160" fill="#A7ADB2"/>
+<rect x="383" y="190" width="7" height="160" fill="#A7ADB2"/>
+<line x1="166" y1="200" x2="300" y2="240" stroke="#A7ADB2" stroke-width="4"/>
+<line x1="434" y1="200" x2="300" y2="240" stroke="#A7ADB2" stroke-width="4"/>
+</g>
+
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Round banquet table with white linen">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F0E6"/><stop offset="1" stop-color="#E9DAC5"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.35" r="0.6"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<rect width="600" height="450" fill="url(#glow)"/>
+<rect y="350" width="600" height="100" fill="#000" opacity="0.04"/>
+<ellipse cx="300" cy="372" rx="190" ry="16" fill="#000" opacity="0.10"/>
+
+<g>
+<path d="M140 210 Q140 360 190 368 L410 368 Q460 360 460 210 Z" fill="#FFFDF8" stroke="#D9CBB8" stroke-width="3"/>
+<path d="M190 222 Q196 300 186 366" stroke="#E7DFD3" stroke-width="3" fill="none"/><path d="M245 222 Q251 300 241 366" stroke="#E7DFD3" stroke-width="3" fill="none"/><path d="M300 222 Q306 300 296 366" stroke="#E7DFD3" stroke-width="3" fill="none"/><path d="M355 222 Q361 300 351 366" stroke="#E7DFD3" stroke-width="3" fill="none"/><path d="M410 222 Q416 300 406 366" stroke="#E7DFD3" stroke-width="3" fill="none"/>
+<ellipse cx="300" cy="210" rx="160" ry="44" fill="#FFFFFF" stroke="#D9CBB8" stroke-width="3"/>
+<ellipse cx="300" cy="206" rx="40" ry="12" fill="#2F4A3A" opacity="0.85"/>
+<circle cx="285" cy="196" r="9" fill="#C8643B"/><circle cx="302" cy="190" r="10" fill="#E8A87C"/><circle cx="318" cy="197" r="8" fill="#C8643B"/>
+<ellipse cx="220" cy="214" rx="22" ry="7" fill="none" stroke="#C9A227" stroke-width="3"/>
+<ellipse cx="380" cy="214" rx="22" ry="7" fill="none" stroke="#C9A227" stroke-width="3"/>
+</g>
+
+</svg>

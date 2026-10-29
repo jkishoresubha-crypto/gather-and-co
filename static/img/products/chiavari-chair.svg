@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Gold Chiavari chair">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7F0E6"/><stop offset="1" stop-color="#E9DAC5"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.35" r="0.6"><stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<rect width="600" height="450" fill="url(#glow)"/>
+<rect y="350" width="600" height="100" fill="#000" opacity="0.04"/>
+<ellipse cx="300" cy="372" rx="190" ry="16" fill="#000" opacity="0.10"/>
+
+<g stroke="#9C7A14" stroke-width="3" stroke-linecap="round">
+<rect x="236" y="90" width="128" height="16" rx="8" fill="#C9A227"/>
+<rect x="236" y="150" width="128" height="10" rx="5" fill="#C9A227"/>
+<line x1="262" y1="106" x2="262" y2="150" stroke="#C9A227" stroke-width="7"/><line x1="286" y1="106" x2="286" y2="150" stroke="#C9A227" stroke-width="7"/><line x1="314" y1="106" x2="314" y2="150" stroke="#C9A227" stroke-width="7"/><line x1="338" y1="106" x2="338" y2="150" stroke="#C9A227" stroke-width="7"/>
+<line x1="244" y1="98" x2="236" y2="368" stroke="#C9A227" stroke-width="10"/>
+<line x1="356" y1="98" x2="364" y2="368" stroke="#C9A227" stroke-width="10"/>
+<line x1="258" y1="250" x2="252" y2="368" stroke="#C9A227" stroke-width="9"/>
+<line x1="342" y1="250" x2="348" y2="368" stroke="#C9A227" stroke-width="9"/>
+<line x1="238" y1="315" x2="362" y2="315" stroke="#C9A227" stroke-width="6"/>
+</g>
+<path d="M222 232 Q300 214 378 232 L372 258 Q300 246 228 258 Z" fill="#FFFDF8" stroke="#D9CBB8" stroke-width="3"/>
+
+</svg>
